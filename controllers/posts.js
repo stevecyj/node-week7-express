@@ -34,16 +34,16 @@ const posts = {
 
   // async findOne({ req, res }) {},
 
-  async updateSinglePost({ req, res, body }) {
+  async updateSinglePost(req, res) {
     const id = req.url.split('/').pop();
-    const post = JSON.parse(body);
+    const { body } = req;
     try {
-      if (post.hasOwnProperty('content') && post.content === '') {
+      if (body.hasOwnProperty('content') && body.content === '') {
         handleError(res);
       } else {
         const updateResult = await Posts.findByIdAndUpdate(id, {
-          ...post,
-          updateAt: this.localDate(),
+          ...body,
+          updateAt: handleLocalDate(),
         });
         if (updateResult) {
           handleSuccess(res, updateResult);
