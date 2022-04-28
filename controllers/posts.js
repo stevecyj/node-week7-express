@@ -32,7 +32,36 @@ const posts = {
     res.end();
   },
 
-  // async findOne({ req, res }) {},
+  // async findOne( req, res ) {},
+
+  async search(req, res) {
+    console.log(req.body);
+    let { keyword, sortby, limit = 10, page = 1 } = req.body;
+    let filter = keyword ? { content: new RegExp(`${keyword}`) } : {};
+    let sort = sortby === 'datetime_pub' ? { createAt: -1 } : { createAt: 1 };
+    if (page < 0) {
+      page = 1;
+    }
+    let skip = limit * (page - 1);
+    try {
+      const count = await Posts.find(filter).count();
+      const posts = await Posts.find(filter).sort(sort).skip(skip).limit(limit);
+      let resPosts = posts.map((item) => {
+        return {
+          postId: item._id,
+          userName: item.userName,
+          userPhoto: item.userPhoto,
+          content: item.content,
+          image: item.image,
+          datetime_pub: item.createAt,
+        };
+      });
+      let payload = { count, limit, page, posts: resPosts };
+      res.status(200).send({ status: 'success', payload });
+    } catch (err) {
+      handleError(res, err);
+    }
+  },
 
   async updateSinglePost(req, res) {
     const id = req.url.split('/').pop();
