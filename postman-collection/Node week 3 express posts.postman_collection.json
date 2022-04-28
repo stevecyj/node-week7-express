@@ -1,0 +1,247 @@
+{
+  "info": {
+    "_postman_id": "2f7c954d-9fe8-4fed-bc75-75769c11f4cd",
+    "name": "Node week 3 express posts",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "新增文章",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"jojo\",\r\n    \"userPhoto\": \"https://images.unsplash.com/photo-1650347325312-f2dea7f5a50e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80\",\r\n    \"tags\": [\r\n        \"預設\"\r\n    ],\r\n    \"image\": \"\",\r\n    \"content\": \"test content\",\r\n    \"type\": \"person\",\r\n    \"likes\": 0,\r\n    \"comments\": 0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URL}}/posts/addPost",
+          "host": ["{{URL}}"],
+          "path": ["posts", "addPost"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "刪除文章，全部",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/posts/deleteAllPosts",
+          "host": ["{{URL}}"],
+          "path": ["posts", "deleteAllPosts"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "刪除文章，單筆",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/posts/deletePost/626a2920a212c45958f1d975",
+          "host": ["{{URL}}"],
+          "path": ["posts", "deletePost", "626a2920a212c45958f1d975"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "修改文章",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Johnny\",\r\n    \"userPhoto\": \"https://images.unsplash.com/photo-1650347325312-f2dea7f5a50e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80\",\r\n    \"tags\": [\r\n        \"預設\"\r\n    ],\r\n    \"image\": \"\",\r\n    \"content\": \"bbb\",\r\n    \"type\": \"person\",\r\n    \"likes\": 0,\r\n    \"comments\": 0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URL}}/posts/updatePost/626a2a9b74c8fe5aef771613",
+          "host": ["{{URL}}"],
+          "path": ["posts", "updatePost", "626a2a9b74c8fe5aef771613"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "取得所有文章",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/posts/getAllPosts",
+          "host": ["{{URL}}"],
+          "path": ["posts", "getAllPosts"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "搜尋文章，分頁",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"keyword\": \"bbb\",\r\n    \"sortby\": \"\",\r\n    \"limit\": null,\r\n    \"page\": null\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URL}}/posts/search",
+          "host": ["{{URL}}"],
+          "path": ["posts", "search"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "新增文章 H",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"jojo\",\r\n    \"userPhoto\": \"https://images.unsplash.com/photo-1650347325312-f2dea7f5a50e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80\",\r\n    \"tags\": [\r\n        \"預設\"\r\n    ],\r\n    \"image\": \"\",\r\n    \"content\": \"test content\",\r\n    \"type\": \"person\",\r\n    \"likes\": 0,\r\n    \"comments\": 0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URLH}}/posts/addPost",
+          "host": ["{{URLH}}"],
+          "path": ["posts", "addPost"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "刪除文章，全部 H",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URLH}}/posts/deleteAllPosts",
+          "host": ["{{URLH}}"],
+          "path": ["posts", "deleteAllPosts"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "刪除文章，單筆 H",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URLH}}/posts/deletePost/626a2a9b74c8fe5aef771613",
+          "host": ["{{URLH}}"],
+          "path": ["posts", "deletePost", "626a2a9b74c8fe5aef771613"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "修改文章 H",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Alice\",\r\n    \"userPhoto\": \"https://images.unsplash.com/photo-1650347325312-f2dea7f5a50e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80\",\r\n    \"tags\": [\r\n        \"預設\"\r\n    ],\r\n    \"image\": \"\",\r\n    \"content\": \"cccddd\",\r\n    \"type\": \"person\",\r\n    \"likes\": 0,\r\n    \"comments\": 0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URLH}}/posts/updatePost/626a3baa7c79420df6141f79",
+          "host": ["{{URLH}}"],
+          "path": ["posts", "updatePost", "626a3baa7c79420df6141f79"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "取得所有文章 H",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URLH}}/posts/getAllPosts",
+          "host": ["{{URLH}}"],
+          "path": ["posts", "getAllPosts"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "搜尋文章，分頁 H",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"keyword\": \"c\",\r\n    \"sortby\": \"\",\r\n    \"limit\": null,\r\n    \"page\": null\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URLH}}/posts/search",
+          "host": ["{{URLH}}"],
+          "path": ["posts", "search"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "URL",
+      "value": "http://192.168.0.100:3000",
+      "type": "string"
+    },
+    {
+      "key": "URLH",
+      "value": "https://glacial-refuge-27066.herokuapp.com",
+      "type": "string"
+    }
+  ]
+}
