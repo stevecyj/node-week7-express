@@ -118,7 +118,7 @@ const posts = {
   },
 
   async updateSinglePost(req, res) {
-    const id = req.url.split('/').pop();
+    const { id } = req.params;
     const { body } = req;
     try {
       if (body.hasOwnProperty('content') && body.content === '') {
