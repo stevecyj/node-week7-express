@@ -39,7 +39,11 @@ const users = {
       const { body } = req;
       const updateUser = await User.findById(id);
       if (updateUser && body.password) {
-        const result = await User.findByIdAndUpdate(id, body);
+        const result = await User.findByIdAndUpdate(
+          id,
+          { ...body, updateAt: handleLocalDate() },
+          { runValidators: true, new: true }
+        );
         result ? handleSuccess(res, updateUser) : handleError(res);
       } else {
         handleError(res);
