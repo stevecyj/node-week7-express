@@ -144,7 +144,7 @@ const posts = {
   },
 
   async deleteSinglePost(req, res) {
-    const id = req.url.split('/').pop();
+    const { id } = req.params;
     try {
       const deleteResult = await Posts.findByIdAndDelete(id);
       // console.log(deleteResult);
