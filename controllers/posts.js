@@ -10,10 +10,15 @@ const posts = {
       const createAt = handleLocalDate();
       if (body.content) {
         const newPost = await Posts.create({
-          name: body.name,
-          content: body.content,
+          user: body.user,
+          userName: body.userName,
+          userPhoto: body.userPhoto,
           tags: body.tags,
-          type: body.type,
+          type: body.type || 'person',
+          image: body.image,
+          content: body.content,
+          likes: req.body.likes,
+          comments: req.body.comments,
           createAt: createAt,
           updateAt: createAt,
         });

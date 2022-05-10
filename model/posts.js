@@ -29,10 +29,6 @@ const postSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    createAt: {
-      type: Date,
-      default: Date.now,
-    },
     content: {
       type: String,
       required: [true, 'Content 未填寫'],
@@ -44,6 +40,14 @@ const postSchema = new mongoose.Schema(
     comments: {
       type: Number,
       default: 0,
+    },
+    createAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updateAt: {
+      type: Date,
+      default: Date.now,
     },
   },
   {
