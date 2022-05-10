@@ -1,9 +1,18 @@
 const mongoose = require('mongoose');
-const postsSchema = new mongoose.Schema(
+const postSchema = new mongoose.Schema(
   {
-    name: {
+    userName: {
       type: String,
       required: [true, '貼文姓名未填寫'],
+    },
+    userPhoto: {
+      type: String,
+      required: [true, '貼文照片未上傳'],
+    },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, '使用者資訊未填寫'],
     },
     tags: [
       {
@@ -23,12 +32,6 @@ const postsSchema = new mongoose.Schema(
     createAt: {
       type: Date,
       default: Date.now,
-      select: false,
-    },
-    updateAt: {
-      type: Date,
-      default: Date.now,
-      select: false,
     },
     content: {
       type: String,
@@ -48,6 +51,5 @@ const postsSchema = new mongoose.Schema(
   }
 );
 
-const posts = mongoose.model('posts', postsSchema);
-
-module.exports = posts;
+const Post = mongoose.model('Post', postSchema);
+module.exports = Post;
