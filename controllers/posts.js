@@ -1,6 +1,6 @@
 const handleSuccess = require('../service/handleSuccess');
 const handleError = require('../service/handleError');
-const handleLocalDate = require('../service/handleLocalDate');
+const { successHandle, errorHandle, handleLocalDate } = require('../service');
 const Posts = require('../model/posts');
 const Users = require('../model/users');
 
@@ -23,7 +23,7 @@ const posts = {
           createAt: createAt,
           updateAt: createAt,
         });
-        handleSuccess(res, newPost);
+        successHandle(res, newPost);
       } else {
         handleError(res);
       }
@@ -34,7 +34,7 @@ const posts = {
 
   async getPosts(req, res) {
     const allPosts = await Posts.find();
-    handleSuccess(res, allPosts);
+    successHandle(res, allPosts);
     res.end();
   },
 
@@ -133,7 +133,7 @@ const posts = {
           { runValidators: true, new: true }
         );
         if (updateResult) {
-          handleSuccess(res, updateResult);
+          successHandle(res, updateResult);
         } else {
           handleError(res, updateResult);
         }
@@ -149,7 +149,7 @@ const posts = {
       const deleteResult = await Posts.findByIdAndDelete(id);
       // console.log(deleteResult);
       if (deleteResult) {
-        handleSuccess(res, deleteResult);
+        successHandle(res, deleteResult);
       } else {
         handleError(res, deleteResult);
       }
@@ -160,7 +160,7 @@ const posts = {
 
   async deletePosts({ req, res }) {
     const deleteResult = await Posts.deleteMany({});
-    handleSuccess(res, deleteResult);
+    successHandle(res, deleteResult);
   },
 
   // async findAllPublished({ req, res }) {},
