@@ -1,12 +1,14 @@
 const User = require('../model/users');
-const handleSuccess = require('../service/handleSuccess');
-const handleError = require('../service/handleError');
-const handleLocalDate = require('../service/handleLocalDate');
+// const successHandle = require('../service/successHandle');
+// const errorHandle = require('../service/errorHandle');
+// const handleLocalDate = require('../service/handleLocalDate');
+const { successHandle, errorHandle, handleLocalDate } = require('../service');
+const { appError } = require('../exceptions');
 
 const users = {
   async getUsers(req, res) {
     const allUsers = await User.find();
-    handleSuccess(res, allUsers);
+    successHandle(res, allUsers);
   },
   async createUser(req, res) {
     try {
@@ -25,12 +27,12 @@ const users = {
           createAt: createAt,
           updateAt: createAt,
         });
-        handleSuccess(res, newUser);
+        successHandle(res, newUser);
       } else {
-        handleError(res);
+        errorHandle(res);
       }
     } catch (err) {
-      handleError(res, err);
+      errorHandle(res, err);
     }
   },
   async resetUserPassword(req, res) {
@@ -44,12 +46,12 @@ const users = {
           { ...body, updateAt: handleLocalDate() },
           { runValidators: true, new: true }
         );
-        result ? handleSuccess(res, updateUser) : handleError(res);
+        result ? successHandle(res, updateUser) : errorHandle(res);
       } else {
-        handleError(res);
+        errorHandle(res);
       }
     } catch (err) {
-      handleError(res, err);
+      errorHandle(res, err);
     }
   },
 };
