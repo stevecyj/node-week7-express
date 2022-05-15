@@ -1,5 +1,3 @@
-const handleSuccess = require('../service/handleSuccess');
-const handleError = require('../service/handleError');
 const { successHandle, errorHandle, handleLocalDate } = require('../service');
 const Posts = require('../model/posts');
 const Users = require('../model/users');
@@ -25,10 +23,10 @@ const posts = {
         });
         successHandle(res, newPost);
       } else {
-        handleError(res);
+        errorHandle(res);
       }
     } catch (err) {
-      handleError(res, err);
+      errorHandle(res, err);
     }
   },
 
@@ -113,7 +111,7 @@ const posts = {
       let payload = { count, limit, page, posts: resPosts };
       res.status(200).send({ status: 'success', payload });
     } catch (err) {
-      handleError(res, err);
+      errorHandle(res, err);
     }
   },
 
@@ -122,7 +120,7 @@ const posts = {
     const { body } = req;
     try {
       if (body.hasOwnProperty('content') && body.content === '') {
-        handleError(res);
+        errorHandle(res);
       } else {
         const updateResult = await Posts.findByIdAndUpdate(
           id,
@@ -135,11 +133,11 @@ const posts = {
         if (updateResult) {
           successHandle(res, updateResult);
         } else {
-          handleError(res, updateResult);
+          errorHandle(res, updateResult);
         }
       }
     } catch (err) {
-      handleError(res, err);
+      errorHandle(res, err);
     }
   },
 
@@ -151,10 +149,10 @@ const posts = {
       if (deleteResult) {
         successHandle(res, deleteResult);
       } else {
-        handleError(res, deleteResult);
+        errorHandle(res, deleteResult);
       }
     } catch (err) {
-      handleError(res, err);
+      errorHandle(res, err);
     }
   },
 
