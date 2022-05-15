@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const { handleErrorAsync, isAuth } = require('../middleware');
+
 const postsController = require('../controllers/posts');
 
 // create and save a new post
-router.post('/addPost', postsController.createPosts);
+router.post('/addPost', handleErrorAsync(postsController.createPosts));
 
 // retrieve all posts from db
 router.get('/getAllPosts', postsController.getPosts);

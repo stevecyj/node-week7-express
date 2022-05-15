@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "TZ=Asia/Taipei node ./bin/www",
-    "start-dev": "cross-env TZ=Asia/Taipei NODE_ENV=dev nodemon ./bin/www",
-    "start-prod": "cross-env TZ=Asia/Taipei NODE_ENV=production ./bin/www"
+    "start-dev": "cross-env NODE_ENV=dev nodemon TZ=Asia/Taipei ./bin/www",
+    "start-prod": "cross-env NODE_ENV=production TZ=Asia/Taipei ./bin/www"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

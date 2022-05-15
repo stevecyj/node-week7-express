@@ -1,33 +1,56 @@
 const { successHandle, errorHandle, handleLocalDate } = require('../service');
+const { appError } = require('../exceptions');
 const Posts = require('../model/posts');
 const Users = require('../model/users');
 
 const posts = {
-  async createPosts(req, res) {
-    try {
-      const { body } = req;
-      const createAt = handleLocalDate();
-      if (body.content) {
-        const newPost = await Posts.create({
-          user: body.user,
-          userName: body.userName,
-          userPhoto: body.userPhoto,
-          tags: body.tags,
-          type: body.type || 'person',
-          image: body.image,
-          content: body.content,
-          likes: req.body.likes,
-          comments: req.body.comments,
-          createAt: createAt,
-          updateAt: createAt,
-        });
-        successHandle(res, newPost);
-      } else {
-        errorHandle(res);
-      }
-    } catch (err) {
-      errorHandle(res, err);
+  async createPosts(req, res, next) {
+    let { user, userName, content } = req.body;
+    // console.log(content == '');
+    if (content == undefined || content == '') {
+      return next(appError(400, '你沒有填寫 content 資料', next));
     }
+
+    const { body } = req;
+    const createAt = handleLocalDate();
+    const newPost = await Posts.create({
+      user: body.user,
+      userName: body.userName,
+      userPhoto: body.userPhoto,
+      tags: body.tags,
+      type: body.type || 'person',
+      image: body.image,
+      content: body.content,
+      likes: req.body.likes,
+      comments: req.body.comments,
+      createAt: createAt,
+      updateAt: createAt,
+    });
+    successHandle(res, newPost);
+    // try {
+    //   const { body } = req;
+    //   const createAt = handleLocalDate();
+    //   if (body.content) {
+    //     const newPost = await Posts.create({
+    //       user: body.user,
+    //       userName: body.userName,
+    //       userPhoto: body.userPhoto,
+    //       tags: body.tags,
+    //       type: body.type || 'person',
+    //       image: body.image,
+    //       content: body.content,
+    //       likes: req.body.likes,
+    //       comments: req.body.comments,
+    //       createAt: createAt,
+    //       updateAt: createAt,
+    //     });
+    //     successHandle(res, newPost);
+    //   } else {
+    //     errorHandle(res);
+    //   }
+    // } catch (err) {
+    //   errorHandle(res, err);
+    // }
   },
 
   async getPosts(req, res) {

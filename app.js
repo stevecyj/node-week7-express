@@ -4,11 +4,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 
+const { uncaughtException, unhandledRejection, errorResponder, error404 } = require('./exceptions');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 
 var app = express();
+
+// 程式出現重大錯誤時
+process.on('uncaughtException', uncaughtException);
 
 require('./connections');
 
@@ -22,5 +27,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+
+// catch 404 and forward to error handler
+app.use(error404);
+
+// error handler
+app.use(errorResponder);
+
+// 未捕捉到的 catch
+process.on('unhandledRejection', unhandledRejection);
 
 module.exports = app;
