@@ -5,24 +5,27 @@ const Users = require('../model/users');
 
 const posts = {
   async createPosts(req, res, next) {
-    let { user, userName, content } = req.body;
-    // console.log(content == '');
+    let { user, userName, userPhoto, tags, type, image, content, likes, comments } = req.body;
+    const postUser = await Users.findById(user).exec();
     if (content == undefined || content == '') {
       return next(appError(400, '你沒有填寫 content 資料', next));
     }
 
-    const { body } = req;
+    if (!postUser) {
+      return next(appError(400, '查無此使用者', next));
+    }
+
     const createAt = handleLocalDate();
     const newPost = await Posts.create({
-      user: body.user,
-      userName: body.userName,
-      userPhoto: body.userPhoto,
-      tags: body.tags,
-      type: body.type || 'person',
-      image: body.image,
-      content: body.content,
-      likes: req.body.likes,
-      comments: req.body.comments,
+      user,
+      userName,
+      userPhoto,
+      tags,
+      type: type || 'person',
+      image,
+      content,
+      likes,
+      comments,
       createAt: createAt,
       updateAt: createAt,
     });
