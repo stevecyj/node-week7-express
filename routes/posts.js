@@ -17,7 +17,7 @@ router.get('/getAllPosts', postsController.getPosts);
 router.post('/search', postsController.search);
 
 // update a post by id
-router.patch('/updatePost/:id', postsController.updateSinglePost);
+router.patch('/updatePost/:postId', handleErrorAsync(postsController.updateSinglePost));
 
 // delete a post by id
 router.delete('/deletePost/:id', postsController.deleteSinglePost);

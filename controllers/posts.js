@@ -5,7 +5,7 @@ const Users = require('../model/users');
 
 const posts = {
   async createPosts(req, res, next) {
-    let { user, userName, userPhoto, tags, type, image, content, likes, comments } = req.body;
+    const { user, userName, userPhoto, tags, type, image, content, likes, comments } = req.body;
     const postUser = await Users.findById(user).exec();
     if (content == undefined || content == '') {
       return next(appError(400, '你沒有填寫 content 資料', next));
@@ -117,30 +117,51 @@ const posts = {
     }
   },
 
-  async updateSinglePost(req, res) {
-    const { id } = req.params;
-    const { body } = req;
-    try {
-      if (body.hasOwnProperty('content') && body.content === '') {
-        errorHandle(res);
-      } else {
-        const updateResult = await Posts.findByIdAndUpdate(
-          id,
-          {
-            ...body,
-            updateAt: handleLocalDate(),
-          },
-          { runValidators: true, new: true }
-        );
-        if (updateResult) {
-          successHandle(res, updateResult);
-        } else {
-          errorHandle(res, updateResult);
-        }
-      }
-    } catch (err) {
-      errorHandle(res, err);
+  async updateSinglePost(req, res, next) {
+    const { postId } = req.params;
+    const { user, content } = req.body;
+    const postUser = await Users.findById(user).exec();
+    console.log(user, content);
+
+    if (content == undefined || content == '') {
+      return next(appError(400, '你沒有填寫 content 資料', next));
     }
+
+    if (!postUser) {
+      return next(appError(400, '查無此使用者', next));
+    }
+
+    const updateResult = await Posts.findByIdAndUpdate(
+      postId,
+      {
+        ...req.body,
+        updateAt: handleLocalDate(),
+      },
+      { runValidators: true, new: true }
+    );
+    successHandle(res, updateResult);
+
+    // try {
+    //   if (body.hasOwnProperty('content') && body.content === '') {
+    //     errorHandle(res);
+    //   } else {
+    //     const updateResult = await Posts.findByIdAndUpdate(
+    //       postId,
+    //       {
+    //         ...body,
+    //         updateAt: handleLocalDate(),
+    //       },
+    //       { runValidators: true, new: true }
+    //     );
+    //     if (updateResult) {
+    //       successHandle(res, updateResult);
+    //     } else {
+    //       errorHandle(res, updateResult);
+    //     }
+    //   }
+    // } catch (err) {
+    //   errorHandle(res, err);
+    // }
   },
 
   async deleteSinglePost(req, res) {
