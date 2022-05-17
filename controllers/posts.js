@@ -121,7 +121,7 @@ const posts = {
     const { postId } = req.params;
     const { user, content } = req.body;
     const postUser = await Users.findById(user).exec();
-    console.log(user, content);
+    // console.log(user, content);
 
     if (content == undefined || content == '') {
       return next(appError(400, '你沒有填寫 content 資料', next));
@@ -140,43 +140,32 @@ const posts = {
       { runValidators: true, new: true }
     );
     successHandle(res, updateResult);
+  },
+
+  async deleteSinglePost(req, res, next) {
+    const { id } = req.params;
+    const { user } = req.body;
+    const deleteUser = await Users.findById(user).exec();
+    console.log(deleteUser);
+
+    if (!deleteUser) {
+      return next(appError(400, '查無此使用者', next));
+    }
+
+    const deleteResult = await Posts.findByIdAndDelete(id);
+    successHandle(res, deleteResult);
 
     // try {
-    //   if (body.hasOwnProperty('content') && body.content === '') {
-    //     errorHandle(res);
+    //   const deleteResult = await Posts.findByIdAndDelete(id);
+    //   // console.log(deleteResult);
+    //   if (deleteResult) {
+    //     successHandle(res, deleteResult);
     //   } else {
-    //     const updateResult = await Posts.findByIdAndUpdate(
-    //       postId,
-    //       {
-    //         ...body,
-    //         updateAt: handleLocalDate(),
-    //       },
-    //       { runValidators: true, new: true }
-    //     );
-    //     if (updateResult) {
-    //       successHandle(res, updateResult);
-    //     } else {
-    //       errorHandle(res, updateResult);
-    //     }
+    //     errorHandle(res, deleteResult);
     //   }
     // } catch (err) {
     //   errorHandle(res, err);
     // }
-  },
-
-  async deleteSinglePost(req, res) {
-    const { id } = req.params;
-    try {
-      const deleteResult = await Posts.findByIdAndDelete(id);
-      // console.log(deleteResult);
-      if (deleteResult) {
-        successHandle(res, deleteResult);
-      } else {
-        errorHandle(res, deleteResult);
-      }
-    } catch (err) {
-      errorHandle(res, err);
-    }
   },
 
   async deletePosts({ req, res }) {
