@@ -157,18 +157,6 @@ const posts = {
 
     const deleteResult = await Posts.findByIdAndDelete(id);
     successHandle(res, deleteResult);
-
-    // try {
-    //   const deleteResult = await Posts.findByIdAndDelete(id);
-    //   // console.log(deleteResult);
-    //   if (deleteResult) {
-    //     successHandle(res, deleteResult);
-    //   } else {
-    //     errorHandle(res, deleteResult);
-    //   }
-    // } catch (err) {
-    //   errorHandle(res, err);
-    // }
   },
 
   async deletePosts({ req, res }) {
