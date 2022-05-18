@@ -149,13 +149,17 @@ const posts = {
     const { id } = req.params;
     const { user } = req.body;
     const deleteUser = await Users.findById(user).exec();
-    console.log(deleteUser);
+    // console.log(deleteUser);
 
     if (!deleteUser) {
       return next(appError(400, '查無此使用者', next));
     }
 
     const deleteResult = await Posts.findByIdAndDelete(id);
+    console.log(deleteResult);
+    if (!deleteResult) {
+      return next(appError(400, '查無此貼文', next));
+    }
     successHandle(res, deleteResult);
   },
 
