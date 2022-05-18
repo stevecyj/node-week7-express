@@ -47,12 +47,13 @@ const resErrorProd = (err, res) => {
 
 // 錯誤處理, error handler, final
 const errorResponder = (err, req, res, next) => {
-  console.log(err.code);
+  console.log(err.name);
   err.statusCode = err.statusCode || 500;
   // dev
   if (process.env.NODE_ENV === 'dev') {
     return resErrorDev(err, res);
   }
+
   // production
   if (err.name === 'ValidationError') {
     err.message = '資料欄位未填寫正確，請重新輸入！';

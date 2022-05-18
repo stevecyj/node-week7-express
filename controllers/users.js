@@ -1,9 +1,7 @@
+const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const User = require('../model/users');
-// const successHandle = require('../service/successHandle');
-// const errorHandle = require('../service/errorHandle');
-// const handleLocalDate = require('../service/handleLocalDate');
-const { successHandle, errorHandle, handleLocalDate } = require('../service');
+const { successHandle, errorHandle, handleLocalDate, generateSendJWT } = require('../service');
 const { appError } = require('../exceptions');
 
 const users = {
@@ -104,6 +102,39 @@ const users = {
     } catch (err) {
       errorHandle(res, err);
     }
+  },
+  async signUp(req, res, next) {
+    let { email, password, confirmPassword, userName } = req.body;
+    // 內容不可為空
+    if (!email || !password || !confirmPassword || !userName) {
+      return next(appError('400', '欄位未填寫正確！', next));
+    }
+    // 密碼正確
+    if (password !== confirmPassword) {
+      return next(appError('400', '密碼不一致！', next));
+    }
+    // 密碼 8 碼以上，16 碼以下，英大小寫+數+8碼+ exclued 特殊符號
+    let reg = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,16}$/, 'g');
+    if (password.match(reg) === null) {
+      return next(appError('400', '請確認密碼格式符合格式', next));
+    }
+    // 暱稱 2 個字以上
+    if (!validator.isLength(userName, { min: 2 })) {
+      return next(appError('400', '暱稱字數低於 2 碼', next));
+    }
+    // 是否為 Email
+    if (!validator.isEmail(email)) {
+      return next(appError('400', 'Email 格式不正確', next));
+    }
+
+    // 加密密碼
+    password = await bcrypt.hash(password, 12);
+    const newUser = await User.create({
+      email,
+      password,
+      userName,
+    });
+    generateSendJWT(newUser, 201, res);
   },
 };
 
