@@ -59,29 +59,6 @@ const users = {
       status: 'success',
       user: newUser,
     });
-    // try {
-    //   const { body } = req;
-    //   const createAt = handleLocalDate();
-    //   if (body.email && body.userName && body.password) {
-    //     const newUser = await User.create({
-    //       email: body.email,
-    //       userName: body.userName,
-    //       password: body.password,
-    //       avatar: body.avatar,
-    //       gender: body.gender,
-    //       follow: body.follow,
-    //       beFollowed: body.beFollowed,
-    //       likeList: body.likeList,
-    //       createAt: createAt,
-    //       updateAt: createAt,
-    //     });
-    //     successHandle(res, newUser);
-    //   } else {
-    //     errorHandle(res);
-    //   }
-    // } catch (err) {
-    //   errorHandle(res, err);
-    // }
   },
   async resetUserPassword(req, res) {
     console.log(req.params);
@@ -103,6 +80,8 @@ const users = {
       errorHandle(res, err);
     }
   },
+
+  // 註冊
   async signUp(req, res, next) {
     let { email, password, confirmPassword, userName } = req.body;
     // 內容不可為空
@@ -135,6 +114,21 @@ const users = {
       userName,
     });
     generateSendJWT(newUser, 201, res);
+  },
+
+  // 登入
+  async signIn(req, res, next) {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return next(appError(400, '帳號密碼不可為空', next));
+    }
+    const user = await User.findOne({ email }).select('+password');
+    // console.log(password, user.password);
+    const auth = await bcrypt.compare(password, user.password);
+    if (!auth) {
+      return next(appError(400, '您的密碼不正確', next));
+    }
+    generateSendJWT(user, 200, res);
   },
 };
 
