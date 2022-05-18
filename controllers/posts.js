@@ -139,6 +139,9 @@ const posts = {
       },
       { runValidators: true, new: true }
     );
+    if (!updateResult) {
+      return next(appError(400, '查無此貼文', next));
+    }
     successHandle(res, updateResult);
   },
 
