@@ -1,7 +1,7 @@
 {
   "info": {
-    "_postman_id": "68d500cb-7657-451a-aaa0-62811288c5d8",
-    "name": "Node week 4 express posts Heroku",
+    "_postman_id": "47fc1262-5e69-46b1-a91f-94b0d70a9fc8",
+    "name": "Node week 5 express posts Heroku (user sign_up, sign_in)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -34,7 +34,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"user\": \"6279bbf9bd49d817b5502f3f\",\r\n    \"userName\": \"ccc\",\r\n    \"userPhoto\": \"https://images.unsplash.com/photo-1650347325312-f2dea7f5a50e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80\",\r\n    \"tags\": [\r\n        \"food\",\"drink\"\r\n    ],\r\n    \"type\": \"group\",\r\n    \"image\": \"\",\r\n    \"content\": \"test content3\",\r\n    \"likes\": 0,\r\n    \"comments\": 0\r\n}",
+          "raw": "{\r\n    \"user\": \"6282573e25f989255871d4c7\",\r\n    \"userName\": \"ccc\",\r\n    \"userPhoto\": \"https://images.unsplash.com/photo-1650347325312-f2dea7f5a50e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80\",\r\n    \"tags\": [\r\n        \"food\",\"drink\"\r\n    ],\r\n    \"type\": \"group\",\r\n    \"image\": \"\",\r\n    \"content\": \"test content3\",\r\n    \"likes\": 0,\r\n    \"comments\": 0\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -67,10 +67,19 @@
       "request": {
         "method": "DELETE",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n     \"user\": \"6282573e25f989255871d4c7\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
-          "raw": "{{URLH}}/posts/deletePost/6279de1042123260abb97d31",
+          "raw": "{{URLH}}/posts/deletePost/6285561219ab7e0590d96de9",
           "host": ["{{URLH}}"],
-          "path": ["posts", "deletePost", "6279de1042123260abb97d31"]
+          "path": ["posts", "deletePost", "6285561219ab7e0590d96de9"]
         }
       },
       "response": []
@@ -117,7 +126,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"keyword\": \"c\",\r\n    \"sortby\": \"\",\r\n    \"limit\": null,\r\n    \"page\": null\r\n}",
+          "raw": "{\r\n    \"keyword\": \"c\",\r\n    \"sortby\": \"\",\r\n    \"limit\": 1,\r\n    \"page\": 5\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -214,7 +223,7 @@
     },
     {
       "key": "URLH",
-      "value": "https://evening-caverns-33383.herokuapp.com",
+      "value": "https://whispering-atoll-51444.herokuapp.com",
       "type": "string"
     }
   ]
