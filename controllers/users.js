@@ -170,7 +170,32 @@ const users = {
   },
 
   // user, update profile，修改個人資料
-  async updateProfile(req, res, next) {},
+  async updateProfile(req, res, next) {
+    const { userName, gender, avatar } = req.body;
+    let avatarExt = avatar.replace(/\/+$/, '').split('.').pop();
+    let regURL = new RegExp(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/, 'g');
+
+    console.log(userName, gender, avatar, avatar.match(regURL));
+    if (!userName || !gender) {
+      return next(appError('400', '欄位未填寫正確', next));
+    }
+
+    if (!avatar.startsWith('https') || avatar.match(regURL) === null) {
+      return next(appError('400', '請輸入正確圖片來源', next));
+    }
+
+    if (!(avatarExt == 'jpg' || avatarExt == 'png')) {
+      return next(appError('400', '限 jpg 或 png', next));
+    }
+
+    const updateProfile = await User.findByIdAndUpdate(
+      req.user.id,
+      { ...req.body, updateAt: handleLocalDate() },
+      { runValidators: true, new: true }
+    );
+
+    successHandle(res, updateProfile);
+  },
 };
 
 module.exports = users;
