@@ -37,6 +37,7 @@ const isAuth = handleErrorAsync(async (req, res, next) => {
       }
     });
   });
+
   // ! check or not check is currentUser exist
   const currentUser = await User.findById(decoded.id);
 
