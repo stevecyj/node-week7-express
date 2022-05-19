@@ -131,8 +131,7 @@ const users = {
     generateSendJWT(user, 200, res);
   },
 
-  // 修改密碼
-  // user, update password
+  // user, update password，修改密碼
   async updatePassword(req, res, next) {
     const { password, confirmPassword } = req.body;
     if (password !== confirmPassword) {
@@ -157,6 +156,14 @@ const users = {
       password: newPassword,
     });
     generateSendJWT(user, 200, res);
+  },
+
+  // user, get profile，取得個人資料
+  async getProfile(req, res, next) {
+    res.status(200).send({
+      status: 'success',
+      user: req.user,
+    });
   },
 };
 
