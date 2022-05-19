@@ -134,6 +134,9 @@ const users = {
   // user, update password，修改密碼
   async updatePassword(req, res, next) {
     const { password, confirmPassword } = req.body;
+    if (!password || !confirmPassword) {
+      return next(appError('400', '欄位未填寫正確！', next));
+    }
     if (password !== confirmPassword) {
       return next(appError('400', '密碼不一致！', next));
     }
@@ -149,7 +152,7 @@ const users = {
     const equal = await bcrypt.compare(password, currentUser.password);
     console.log(equal);
     if (equal) {
-      return next(appError('400', '請輸入新密碼', next));
+      return next(appError('400', '新密碼與舊密碼相同', next));
     }
 
     const user = await User.findByIdAndUpdate(req.user.id, {
@@ -165,6 +168,9 @@ const users = {
       user: req.user,
     });
   },
+
+  // user, update profile，修改個人資料
+  async updateProfile(req, res, next) {},
 };
 
 module.exports = users;
