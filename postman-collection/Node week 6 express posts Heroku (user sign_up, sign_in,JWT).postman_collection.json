@@ -1,0 +1,169 @@
+{
+  "info": {
+    "_postman_id": "47a159c6-7b17-404a-aafa-238a2959d1d4",
+    "name": "Node week 6 express posts Heroku (user sign_up, sign_in,JWT)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "8272765"
+  },
+  "item": [
+    {
+      "name": "使用者，sign_up H",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userName\": \"JOJO4\",\r\n    \"email\": \"jojo4@gmail.com\",\r\n    \"confirmPassword\": \"Qwer1234\",\r\n    \"password\": \"Qwer1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URLH}}/users/sign_up",
+          "host": ["{{URLH}}"],
+          "path": ["users", "sign_up"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "使用者，sign_in H",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"jojo4@gmail.com\",\r\n    \"password\": \"Qwer1237\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URLH}}/users/sign_in",
+          "host": ["{{URLH}}"],
+          "path": ["users", "sign_in"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "使用者，更新密碼 H",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGRkMWVjMTI0YTc5ZGZjNTA3NzY3OSIsImlhdCI6MTY1MzQ2MTUxMiwiZXhwIjoxNjU0MDY2MzEyfQ.bKEYlUnJfCiMscOgLsedNCAwO0NpbCF5-GM6F2vJMN0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"password\": \"Qwer1237\",\r\n    \"confirmPassword\": \"Qwer1237\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URLH}}/users/updatePassword",
+          "host": ["{{URLH}}"],
+          "path": ["users", "updatePassword"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "使用者，取得個人資料 H",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGRkMWVjMTI0YTc5ZGZjNTA3NzY3OSIsImlhdCI6MTY1MzQ2MTU5MCwiZXhwIjoxNjU0MDY2MzkwfQ.ZNGG-jdE8Rr7DIymUedoDFpnmPcY3h43RXEsTeu67ZU",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URLH}}/users/profile",
+          "host": ["{{URLH}}"],
+          "path": ["users", "profile"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "使用者，更新個人資料 H",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGRkMWVjMTI0YTc5ZGZjNTA3NzY3OSIsImlhdCI6MTY1MzQ2MTU5MCwiZXhwIjoxNjU0MDY2MzkwfQ.ZNGG-jdE8Rr7DIymUedoDFpnmPcY3h43RXEsTeu67ZU",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userName\": \"ccc\",\r\n    \"gender\": \"female\",\r\n    \"avatar\": \"https://randomuser.me/api/portraits/lego/3.jpg\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URLH}}/users/updateProfile",
+          "host": ["{{URLH}}"],
+          "path": ["users", "updateProfile"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "URL",
+      "value": "http://192.168.0.100:3000",
+      "type": "string"
+    },
+    {
+      "key": "URLH",
+      "value": "https://whispering-atoll-51444.herokuapp.com",
+      "type": "string"
+    }
+  ]
+}
