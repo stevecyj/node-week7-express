@@ -1,4 +1,4 @@
-# node-week5-express
+# node-week7-express
 
 ## project structure
 
@@ -7,6 +7,7 @@
 - controllers
   - http
   - post
+  - upload
   - user
 - exceptions
   - uncaughtException
