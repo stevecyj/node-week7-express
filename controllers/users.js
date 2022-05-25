@@ -163,6 +163,9 @@ const users = {
 
   // user, get profile，取得個人資料
   async getProfile(req, res, next) {
+    const currentUser = await User.findById(req.user.id);
+    console.log(currentUser);
+
     res.status(200).send({
       status: 'success',
       user: req.user,

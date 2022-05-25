@@ -40,6 +40,9 @@ const isAuth = handleErrorAsync(async (req, res, next) => {
 
   // ! check or not check is currentUser exist
   const currentUser = await User.findById(decoded.id);
+  if (!currentUser) {
+    return next(appError(404, '找不到使用者', next));
+  }
 
   // req 加上 user 資訊，傳回路由
   req.user = currentUser;
