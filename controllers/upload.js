@@ -1,10 +1,5 @@
-const bcrypt = require('bcryptjs');
-const validator = require('validator');
 const sizeOf = require('image-size');
 const { ImgurClient } = require('imgur');
-const upload = require('../service/image');
-const User = require('../model/users');
-const { successHandle, errorHandle, handleLocalDate, generateSendJWT } = require('../service');
 const { appError } = require('../exceptions');
 
 const uploads = {
@@ -26,6 +21,7 @@ const uploads = {
       type: 'base64',
       album: process.env.IMGUR_ALBUM_ID,
     });
+    // console.log(response);
     res.status(200).json({
       status: 'success',
       imgUrl: response.data.link,
