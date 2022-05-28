@@ -42,7 +42,7 @@ const posts = {
 
   async search(req, res) {
     try {
-      console.log(req.body);
+      // console.log(req.body);
       let { keyword, sortby, limit = 10, page = 1, userId, authorId } = req.body;
       let filter = keyword ? { content: new RegExp(`${keyword}`) } : {};
       let sort = sortby === 'desc' ? { createAt: -1 } : { createAt: 1 };

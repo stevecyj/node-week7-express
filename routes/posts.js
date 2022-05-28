@@ -14,7 +14,7 @@ router.get('/', isAuth, postsController.getPosts);
 // router.get('/getOnePost/:id', postsController.findOne);
 
 // search posts by keyword
-router.post('/search', postsController.search);
+router.post('/search', isAuth, postsController.search);
 
 // update a post by id
 router.patch('/:id', isAuth, handleErrorAsync(postsController.updateSinglePost));
