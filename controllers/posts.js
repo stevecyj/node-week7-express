@@ -118,7 +118,7 @@ const posts = {
   },
 
   async updateSinglePost(req, res, next) {
-    const { postId } = req.params;
+    const { id } = req.params;
     const { user, content } = req.body;
     const postUser = await Users.findById(user).exec();
     // console.log(user, content);
@@ -132,7 +132,7 @@ const posts = {
     }
 
     const updateResult = await Posts.findByIdAndUpdate(
-      postId,
+      id,
       {
         ...req.body,
         updateAt: handleLocalDate(),
