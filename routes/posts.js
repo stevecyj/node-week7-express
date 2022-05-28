@@ -8,7 +8,7 @@ const postsController = require('../controllers/posts');
 router.post('/add', isAuth, handleErrorAsync(postsController.createPosts));
 
 // retrieve all posts from db
-router.get('/posts', isAuth, postsController.getPosts);
+router.get('/', isAuth, postsController.getPosts);
 
 // find a single post by id
 // router.get('/getOnePost/:id', postsController.findOne);
@@ -23,7 +23,7 @@ router.patch('/:id', isAuth, handleErrorAsync(postsController.updateSinglePost))
 router.delete('/:id', isAuth, handleErrorAsync(postsController.deleteSinglePost));
 
 // delete all posts
-router.delete('/deleteAllPosts', postsController.deletePosts);
+router.delete('/', isAuth, handleErrorAsync(postsController.deletePosts));
 
 // find all published posts
 // router.get('/getAllPublishedPosts', postsController.findAllPublished);
