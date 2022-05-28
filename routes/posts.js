@@ -5,7 +5,7 @@ const { handleErrorAsync, isAuth } = require('../middleware');
 const postsController = require('../controllers/posts');
 
 // create and save a new post
-router.post('/addPost', handleErrorAsync(postsController.createPosts));
+router.post('/add', isAuth, handleErrorAsync(postsController.createPosts));
 
 // retrieve all posts from db
 router.get('/getAllPosts', postsController.getPosts);
