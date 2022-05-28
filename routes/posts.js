@@ -20,7 +20,7 @@ router.post('/search', postsController.search);
 router.patch('/:id', isAuth, handleErrorAsync(postsController.updateSinglePost));
 
 // delete a post by id
-router.delete('/deletePost/:id', handleErrorAsync(postsController.deleteSinglePost));
+router.delete('/:id', isAuth, handleErrorAsync(postsController.deleteSinglePost));
 
 // delete all posts
 router.delete('/deleteAllPosts', postsController.deletePosts);

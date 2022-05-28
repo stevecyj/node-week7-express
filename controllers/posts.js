@@ -156,7 +156,7 @@ const posts = {
     }
 
     const deleteResult = await Posts.findByIdAndDelete(id);
-    console.log(deleteResult);
+    // console.log(deleteResult);
     if (!deleteResult) {
       return next(appError(400, '查無此貼文', next));
     }
