@@ -8,7 +8,7 @@ const postsController = require('../controllers/posts');
 router.post('/add', isAuth, handleErrorAsync(postsController.createPosts));
 
 // retrieve all posts from db
-router.get('/getAllPosts', postsController.getPosts);
+router.get('/posts', isAuth, postsController.getPosts);
 
 // find a single post by id
 // router.get('/getOnePost/:id', postsController.findOne);
