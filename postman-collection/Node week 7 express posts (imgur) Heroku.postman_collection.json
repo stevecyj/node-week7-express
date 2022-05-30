@@ -1,0 +1,110 @@
+{
+  "info": {
+    "_postman_id": "46781f7f-5752-40d1-9bf6-f66d88559b9d",
+    "name": "Node week 7 express posts (imgur) Heroku",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "8272765"
+  },
+  "item": [
+    {
+      "name": "使用者，sign_up Heroku",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userName\": \"jojo\",\r\n    \"email\": \"jojo3@gmail.com\",\r\n    \"confirmPassword\": \"Qwer1234\",\r\n    \"password\": \"Qwer1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URLH}}/users/sign_up",
+          "host": ["{{URLH}}"],
+          "path": ["users", "sign_up"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "使用者，sign_in Heroku",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"jojo3@gmail.com\",\r\n    \"password\": \"Qwer1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URLH}}/users/sign_in",
+          "host": ["{{URLH}}"],
+          "path": ["users", "sign_in"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "上傳圖片 Heroku",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTUwZGIxZDc0MzNlNDQ5MjI5NDc2YiIsImlhdCI6MTY1MzkzNTU1MiwiZXhwIjoxNjU0NTQwMzUyfQ.uRYT1CsN1-7dBHmPfpyPAEeZr9cRwsyFn0Hc0-vNSuQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "",
+              "type": "file",
+              "src": "/E:/Downloads/smile.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{URLH}}/upload",
+          "host": ["{{URLH}}"],
+          "path": ["upload"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "URLH",
+      "value": "https://whispering-atoll-51444.herokuapp.com",
+      "type": "string"
+    }
+  ]
+}
